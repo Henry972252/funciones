@@ -3,7 +3,7 @@ import random
 def funcion_sumar(a, b):
     resultado = a + b
     return resultado
-token = "YOUR TOKEN"
+token = "TOKEN"
 
 # Juego de Piedra, Papel o Tijera
 
@@ -109,3 +109,33 @@ def lanzar_dado(caras=6, cantidad=1):
     resultados = [random.randint(1, caras) for _ in range(cantidad)]
     total = sum(resultados)
     return resultados, total
+
+# Rareza de memes
+memes = {
+    "animales": [
+        ("memea.jpeg", 80),
+        ("memea1.jpeg", 10)
+    ],
+    "gatos": [
+        ("memeg.jpeg", 70),
+        ("memeg1.jpeg", 5)
+    ],
+    "random": [
+        ("random.jpeg", 90),
+        ("random1.jpeg", 2)
+    ]
+}
+
+def obtener_meme(categoria="random"):
+    if categoria not in memes:
+        return None
+
+    lista_memes = memes[categoria]
+
+    total_peso = sum(100 - rareza for _, rareza in lista_memes)
+    elegido = random.choices(
+        lista_memes,
+        weights=[100 - rareza for _, rareza in lista_memes],
+        k=1
+    )[0]
+    return elegido[0]
